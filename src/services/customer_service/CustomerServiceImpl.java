@@ -11,7 +11,7 @@ public class CustomerServiceImpl extends ServiceImpl implements CustomerService 
 
     static {
         Customer customer = new Customer(01, "Nguyễn Văn Ba", "10/02/1996", "Male", 0123455674, 0375235223, "Nguyenvanba@gmail.com",
-                "Diamond", "Quãng Nam");
+                "Diamond", "Quảng Nam");
         customerList.add(customer);
     }
 
@@ -69,7 +69,6 @@ public class CustomerServiceImpl extends ServiceImpl implements CustomerService 
         System.out.println("Enter address: ");
         String address = scanner.nextLine();
         Customer customer = new Customer(id, name, dayOfBirth, gender, identityCard, phoneNumber, email, kindsOfCustomer, address);
-        customerList.add(customer);
         for (int i = 0; i < customerList.size(); i++) {
             if (customerList.get(i).getId() == id) {
                 customerList.get(i).setId(id);

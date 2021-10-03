@@ -83,7 +83,6 @@ public class EmployeeServiceImpl extends ServiceImpl implements EmployeeService 
                 employeesList.get(i).setStandard(standard);
                 employeesList.get(i).setPosition(position);
                 employeesList.get(i).setSalary(salary);
-
             }
         }
     }
