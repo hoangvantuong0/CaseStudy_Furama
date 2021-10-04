@@ -9,6 +9,4 @@ public interface BookingService extends Services {
     @Override
     void display();
 
-    @Override
-    void edit();
 }

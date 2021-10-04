@@ -1,8 +1,8 @@
-package services.contact_service;
+package services.contract_service;
 
 import services.Services;
 
-public interface ContactService extends Services {
+public interface ContractService extends Services {
     @Override
     default void add() {
 
@@ -13,7 +13,6 @@ public interface ContactService extends Services {
 
     }
 
-    @Override
     default void edit() {
 
     }

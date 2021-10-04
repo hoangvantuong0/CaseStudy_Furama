@@ -1,12 +1,11 @@
 package services.customer_service;
 
 import models.person.Customer;
-import services.ServiceImpl;
 
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class CustomerServiceImpl extends ServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
     static LinkedList<Customer> customerList = new LinkedList<>();
 
     static {

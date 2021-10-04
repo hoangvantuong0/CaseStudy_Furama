@@ -9,6 +9,5 @@ public interface CustomerService extends Services {
     @Override
     void display();
 
-    @Override
     void edit();
 }

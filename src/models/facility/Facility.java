@@ -1,8 +1,9 @@
 package models.facility;
 
 public class Facility {
+    private String IdFacility;
     private String service;
-    private Double areaUsing;
+    private double areaUsing;
     private double rentalFee;
     private int numberOfPeople;
     private String rentalType;
@@ -10,12 +11,21 @@ public class Facility {
 
     }
 
-    public Facility(String service, Double areaUsing, double rentalFee, int numberOfPeople, String rentalType) {
+    public Facility(String idFacility, String service, double areaUsing, double rentalFee, int numberOfPeople, String rentalType) {
+        IdFacility = idFacility;
         this.service = service;
         this.areaUsing = areaUsing;
         this.rentalFee = rentalFee;
         this.numberOfPeople = numberOfPeople;
         this.rentalType = rentalType;
+    }
+
+    public String getIdFacility() {
+        return IdFacility;
+    }
+
+    public void setIdFacility(String idFacility) {
+        IdFacility = idFacility;
     }
 
     public String getService() {
@@ -26,11 +36,11 @@ public class Facility {
         this.service = service;
     }
 
-    public Double getAreaUsing() {
+    public double getAreaUsing() {
         return areaUsing;
     }
 
-    public void setAreaUsing(Double areaUsing) {
+    public void setAreaUsing(double areaUsing) {
         this.areaUsing = areaUsing;
     }
 

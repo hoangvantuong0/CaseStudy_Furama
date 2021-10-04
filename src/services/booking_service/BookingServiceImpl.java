@@ -1,7 +1,14 @@
 package services.booking_service;
 
-import services.ServiceImpl;
+public class BookingServiceImpl implements BookingService {
 
-public class BookingServiceImpl extends ServiceImpl implements BookingService {
+    @Override
+    public void add() {
 
+    }
+
+    @Override
+    public void display() {
+
+    }
 }

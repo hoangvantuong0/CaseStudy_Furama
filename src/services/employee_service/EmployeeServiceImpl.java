@@ -1,11 +1,11 @@
 package services.employee_service;
 
 import models.person.Employee;
-import services.ServiceImpl;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class EmployeeServiceImpl extends ServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService {
     static ArrayList<Employee> employeesList = new ArrayList<>();
 
     static {
