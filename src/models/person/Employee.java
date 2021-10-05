@@ -1,10 +1,11 @@
 package models.person;
 
-public class Employee extends Person{
+public class Employee extends Person {
     private String standard;
     private String position;
     public double salary;
-    public Employee(){
+
+    public Employee() {
 
     }
 
@@ -14,7 +15,8 @@ public class Employee extends Person{
         this.salary = salary;
     }
 
-    public Employee(int id, String name, String dayOfBirth, String gender, int identityCard, int phoneNumber, String email, String standard, String position, double salary) {
+    public Employee(int id, String name, String dayOfBirth, String gender, int identityCard,
+                    int phoneNumber, String email, String standard, String position, double salary) {
         super(id, name, dayOfBirth, gender, identityCard, phoneNumber, email);
         this.standard = standard;
         this.position = position;
@@ -60,5 +62,11 @@ public class Employee extends Person{
                 ", position= " + position + '\'' +
                 ", salary= " + salary +
                 '}';
+    }
+
+    public String getInfoEmployee() {
+        return super.getId() + "," + super.getName() + "," + super.getDayOfBirth() + "," + super.getGender() + ","
+                + super.getIdentityCard() + "," + super.getPhoneNumber() + "," + super.getEmail() + "," + standard +
+                "," + position + "," + salary;
     }
 }

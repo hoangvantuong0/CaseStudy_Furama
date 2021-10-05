@@ -1,7 +1,7 @@
 package models.facility;
 
 public class Facility {
-    private String IdFacility;
+    private String idFacility;
     private String service;
     private double areaUsing;
     private double rentalFee;
@@ -12,7 +12,7 @@ public class Facility {
     }
 
     public Facility(String idFacility, String service, double areaUsing, double rentalFee, int numberOfPeople, String rentalType) {
-        IdFacility = idFacility;
+        this.idFacility = idFacility;
         this.service = service;
         this.areaUsing = areaUsing;
         this.rentalFee = rentalFee;
@@ -21,11 +21,11 @@ public class Facility {
     }
 
     public String getIdFacility() {
-        return IdFacility;
+        return idFacility;
     }
 
     public void setIdFacility(String idFacility) {
-        IdFacility = idFacility;
+        this.idFacility = idFacility;
     }
 
     public String getService() {
@@ -71,11 +71,24 @@ public class Facility {
     @Override
     public String toString() {
         return "Facility{" +
-                "service='" + service + '\'' +
+                "IdFacility='" + idFacility + '\'' +
+                ", service='" + service + '\'' +
                 ", areaUsing=" + areaUsing +
                 ", rentalFee=" + rentalFee +
                 ", numberOfPeople=" + numberOfPeople +
                 ", rentalType='" + rentalType + '\'' +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Facility facility = (Facility) obj;
+        return this.idFacility.equals(((Facility) obj).idFacility)
+                && this.getService().equals(((Facility) obj).getService());
     }
 }

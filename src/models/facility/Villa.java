@@ -48,6 +48,7 @@ public class Villa extends Facility{
     @Override
     public String toString() {
         return "Villa{" +
+                "IdFacility='" + getIdFacility() + '\'' +
                 "service='" + getService() +
                 ", areaUsing=" + getAreaUsing() +
                 ", rentalFee=" + getRentalFee() +
@@ -57,5 +58,17 @@ public class Villa extends Facility{
                 ", poolSize=" + poolSize +
                 ", numberOfFloor=" + numberOfFloor +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Villa villa = (Villa) obj;
+        return this.getIdFacility().equals(((Villa) obj).getIdFacility())
+                && this.getService().equals(((Villa) obj).getService());
     }
 }

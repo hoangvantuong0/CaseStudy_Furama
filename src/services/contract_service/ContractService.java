@@ -12,8 +12,12 @@ public interface ContractService extends Services {
     default void display() {
 
     }
-
+@Override
     default void edit() {
+
+    }
+    @Override
+    default void delete(){
 
     }
 }

@@ -1,9 +1,11 @@
 package models.person;
 
-public class Customer extends Person{
+public class Customer extends Person {
     private String kindsOfCustomer;
     private String address;
-    public Customer(){
+
+    public Customer(int i, String s, String s1, String s2, String s3, int parseInt, int anInt,
+                    String s4, String s5, String s6) {
 
     }
 
@@ -12,7 +14,8 @@ public class Customer extends Person{
         this.address = address;
     }
 
-    public Customer(int id, String name, String dayOfBirth, String gender, int identityCard, int phoneNumber, String email, String kindsOfCustomer, String address) {
+    public Customer(int id, String name, String dayOfBirth, String gender, int identityCard,
+                    int phoneNumber, String email, String kindsOfCustomer, String address) {
         super(id, name, dayOfBirth, gender, identityCard, phoneNumber, email);
         this.kindsOfCustomer = kindsOfCustomer;
         this.address = address;
@@ -47,5 +50,11 @@ public class Customer extends Person{
                 ", kindsOfCustomer= " + kindsOfCustomer + '\'' +
                 ", address= " + address + '\'' +
                 '}';
+    }
+
+    public String getInfoCustomer() {
+        return super.getId() + "," + super.getName() + "," + super.getDayOfBirth() + "," + super.getGender() + ","
+                + super.getIdentityCard() + "," + super.getPhoneNumber() + "," + super.getEmail() + "," + kindsOfCustomer +
+                "," + address;
     }
 }

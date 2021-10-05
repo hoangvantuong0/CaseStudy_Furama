@@ -3,6 +3,7 @@ package controllers;
 import services.customer_service.CustomerService;
 import services.customer_service.CustomerServiceImpl;
 import services.employee_service.EmployeeServiceImpl;
+import services.facility_service.FacilityServiceImpl;
 
 import java.util.Scanner;
 
@@ -11,9 +12,10 @@ public class FuramaController {
     public static void main(String[] args) {
         EmployeeServiceImpl employeeManagement = new EmployeeServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
+        FacilityServiceImpl facilityService = new FacilityServiceImpl();
         Scanner scanner = new Scanner(System.in);
-        boolean flag = true;
-        while (flag) {
+        int choice = 0;
+        while (choice !=6) {
             System.out.println("Menu: " + "\n" +
                     "1. Employee Management" + "\n" +
                     "2. Customer Management" + "\n" +
@@ -22,7 +24,7 @@ public class FuramaController {
                     "5. Promotion Management" + "\n" +
                     "6. Exit ");
             System.out.println("Enter your choice: ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1: {
                     boolean flag1 = true;
@@ -74,8 +76,8 @@ public class FuramaController {
                                 flag1 = false;
                         }
                     }
-                break;
-            }
+                    break;
+                }
                 case 3: {
                     boolean flag1 = true;
                     while (flag1) {
@@ -88,10 +90,13 @@ public class FuramaController {
                         int choice1 = Integer.parseInt(scanner.nextLine());
                         switch (choice1) {
                             case 1:
+                                facilityService.display();
                                 break;
                             case 2:
+                                facilityService.add();
                                 break;
                             case 3:
+                                facilityService.displayMaintenance();
                                 break;
                             case 4:
                                 flag1 = false;
@@ -146,10 +151,10 @@ public class FuramaController {
                     }
                     break;
                 }
-                }
             }
         }
-
     }
+
+}
 
 

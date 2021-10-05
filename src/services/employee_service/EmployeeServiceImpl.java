@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EmployeeServiceImpl implements EmployeeService {
+    static final String EMPLOYEE_PATH = "src/data/employee.csv";
     static ArrayList<Employee> employeesList = new ArrayList<>();
 
     static {
@@ -85,6 +86,11 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employeesList.get(i).setSalary(salary);
             }
         }
+    }
+
+    @Override
+    public void delete() {
+
     }
 }
 

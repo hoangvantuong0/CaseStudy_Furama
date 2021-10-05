@@ -37,13 +37,26 @@ public class House extends Facility{
     @Override
     public String toString() {
         return "House{" +
-                "service='" + getService() +
-                ", areaUsing=" + getAreaUsing() +
-                ", rentalFee=" + getRentalFee() +
-                ", numberOfPeople=" + getNumberOfPeople() +
+                "IdFacility='" + getIdFacility() + '\'' +
+                " service='" + getService() +
+                ", areaUsing= " + getAreaUsing() +
+                ", rentalFee= " + getRentalFee() +
+                ", numberOfPeople =" + getNumberOfPeople() +
                 ", rentalType='" + getRentalType() +
                 "standardOfRoom='" + standardOfRoom + '\'' +
                 ", numberOfFloor=" + numberOfFloor +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        House house = (House) obj;
+        return this.getIdFacility().equals(((House) obj).getIdFacility())
+                && this.getService().equals(((House) obj).getService());
     }
 }

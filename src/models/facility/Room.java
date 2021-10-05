@@ -26,12 +26,25 @@ public class Room extends Facility{
     @Override
     public String toString() {
         return "Room{" +
-                "service='" + getService() +
+                "IdFacility='" + getIdFacility() + '\'' +
+                ", service='" + getService() +
                 ", areaUsing=" + getAreaUsing() +
                 ", rentalFee=" + getRentalFee() +
                 ", numberOfPeople=" + getNumberOfPeople() +
                 ", rentalType='" + getRentalType() +
-                "freeService='" + freeService + '\'' +
+                ", freeService='" + freeService + '\'' +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Room room = (Room) obj;
+        return this.getIdFacility().equals(((Room) obj).getIdFacility())
+                && this.getFreeService().equals(((Room) obj).getFreeService());
     }
 }
