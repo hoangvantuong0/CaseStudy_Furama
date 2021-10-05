@@ -10,8 +10,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     static ArrayList<Employee> employeesList = new ArrayList<>();
 
     static {
-        Employee employee1 = new Employee(01, "Nguyễn Văn An", "10/02/1993", "Male", 0123455667, 0375235267, "Nguyenvanan@gmail.com",
-                "amateur", "employee", 100000);
+        Employee employee1 = new Employee("01", "Nguyễn Văn An", "10-2", "male",
+                "0298475214", "012452363", "nguyenvanan.com", "Đại học",
+                "Worker", 2012321);
         employeesList.add(employee1);
     }
 
@@ -19,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void add() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = scanner.nextLine();
         System.out.println("Enter name: ");
         String name = scanner.nextLine();
         System.out.println("Enter day of birth: ");
@@ -27,9 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         System.out.println("Enter gender: ");
         String gender = scanner.nextLine();
         System.out.println("enter identity card number: ");
-        int identityCard = Integer.parseInt(scanner.nextLine());
+        String identityCard = scanner.nextLine();
         System.out.println("Enter phone number: ");
-        int phoneNumber = Integer.parseInt(scanner.nextLine());
+        String phoneNumber = scanner.nextLine();
         System.out.println("Enter email: ");
         String email = scanner.nextLine();
         System.out.println("Enter standard: ");
@@ -53,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void edit() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = scanner.nextLine();
         System.out.println("Enter name: ");
         String name = scanner.nextLine();
         System.out.println("Enter day of birth: ");
@@ -61,9 +62,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         System.out.println("Enter gender: ");
         String gender = scanner.nextLine();
         System.out.println("enter identity card number: ");
-        int identityCard = Integer.parseInt(scanner.nextLine());
+        String identityCard = scanner.nextLine();
         System.out.println("Enter phone number: ");
-        int phoneNumber = Integer.parseInt(scanner.nextLine());
+        String phoneNumber = scanner.nextLine();
         System.out.println("Enter email: ");
         String email = scanner.nextLine();
         System.out.println("Enter standard: ");
@@ -72,8 +73,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         String position = scanner.nextLine();
         System.out.println("Enter salary: ");
         double salary = Double.parseDouble(scanner.nextLine());
-        for (int i=0; i<employeesList.size(); i++){
-            if(employeesList.get(i).getId() == id){
+        for (int i = 0; i < employeesList.size(); i++) {
+            if (employeesList.get(i).getId() == id) {
                 employeesList.get(i).setId(id);
                 employeesList.get(i).setName(name);
                 employeesList.get(i).setDayOfBirth(dayOfBirth);

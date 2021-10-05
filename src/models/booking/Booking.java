@@ -1,5 +1,6 @@
 package models.booking;
 
+import models.facility.Facility;
 import models.person.Customer;
 
 public class Booking {
@@ -7,19 +8,18 @@ public class Booking {
     private String startDay;
     private String endDay;
     private Customer customer;
-    private String serviceName;
+    private Facility facility;
     private String typeOfService;
 
-    public Booking() {
+    public Booking(int idBooking, String startDay, String endDay, String s, String s1, String typeOfService) {
     }
 
-    public Booking(int idBooking, String startDay, String endDay, Customer customer,
-                   String serviceName, String typeOfService) {
+    public Booking(int idBooking, String startDay, String endDay, Customer customer, Facility facility, String typeOfService) {
         this.idBooking = idBooking;
         this.startDay = startDay;
         this.endDay = endDay;
         this.customer = customer;
-        this.serviceName = serviceName;
+        this.facility = facility;
         this.typeOfService = typeOfService;
     }
 
@@ -55,12 +55,12 @@ public class Booking {
         this.customer = customer;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public Facility getFacility() {
+        return facility;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setFacility(Facility facility) {
+        this.facility = facility;
     }
 
     public String getTypeOfService() {
@@ -78,12 +78,24 @@ public class Booking {
                 ", startDay='" + startDay + '\'' +
                 ", endDay='" + endDay + '\'' +
                 ", customer=" + customer +
-                ", serviceName='" + serviceName + '\'' +
+                ", facility=" + facility +
                 ", typeOfService='" + typeOfService + '\'' +
                 '}';
     }
-    public String getInfoBook(){
+
+    public String getInfoBooking(){
         return this.idBooking + "," + this.startDay + "," + this.endDay + "," +
-                 this.customer + "," + this.serviceName + "," + this.typeOfService;
+                 this.customer.getId() + "," + this.facility.getService() + "," + this.typeOfService;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Booking booking = (Booking) obj;
+        return this.getIdBooking() == (booking.getIdBooking());
     }
 }

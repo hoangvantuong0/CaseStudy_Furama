@@ -1,5 +1,6 @@
 package controllers;
 
+import services.booking_service.BookingServiceImpl;
 import services.customer_service.CustomerService;
 import services.customer_service.CustomerServiceImpl;
 import services.employee_service.EmployeeServiceImpl;
@@ -13,6 +14,7 @@ public class FuramaController {
         EmployeeServiceImpl employeeManagement = new EmployeeServiceImpl();
         CustomerService customerService = new CustomerServiceImpl();
         FacilityServiceImpl facilityService = new FacilityServiceImpl();
+        BookingServiceImpl bookingService = new BookingServiceImpl();
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
         while (choice !=6) {
@@ -118,8 +120,10 @@ public class FuramaController {
                         int choice1 = Integer.parseInt(scanner.nextLine());
                         switch (choice1) {
                             case 1:
+                                bookingService.add();
                                 break;
                             case 2:
+                                bookingService.display();
                                 break;
                             case 3:
                                 break;

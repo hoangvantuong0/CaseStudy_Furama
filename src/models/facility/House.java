@@ -59,4 +59,9 @@ public class House extends Facility{
         return this.getIdFacility().equals(((House) obj).getIdFacility())
                 && this.getService().equals(((House) obj).getService());
     }
+    public String getInformationHouse() {
+        return getIdFacility()+ "," + getService() + "," + getAreaUsing() +"," + getRentalFee()+ "," + getNumberOfPeople() +
+                ","  + getRentalType() + "," + standardOfRoom + ","  + numberOfFloor;
+    }
 }
+

@@ -14,8 +14,8 @@ public class ReadCustomerData {
         List<Customer> customerList = new LinkedList<>();
         for (String string : stringList){
             String[] temp = string.split(",");
-            Customer customer = new Customer(Integer.parseInt(temp[0]), temp[1], temp[2], temp[3], temp[4],
-                    Integer.parseInt(temp[5]), Integer.parseInt(temp[6]), temp[7], temp[8], temp[9]);
+            Customer customer = new Customer(temp[0], temp[1], temp[2], temp[3], temp[4],
+                   temp[5], temp[6], temp[7], temp[8], temp[9]);
         }
         return customerList;
     }

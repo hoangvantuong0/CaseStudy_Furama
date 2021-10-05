@@ -71,4 +71,8 @@ public class Villa extends Facility{
         return this.getIdFacility().equals(((Villa) obj).getIdFacility())
                 && this.getService().equals(((Villa) obj).getService());
     }
+    public String getInformationVilla() {
+        return getIdFacility()+ "," +getService() + "," + getAreaUsing() +"," + getRentalFee()+ "," + getNumberOfPeople() +
+                ","  + getRentalType() + "," + standardOfRoom + ","  +poolSize +  ","  + numberOfFloor;
+    }
 }

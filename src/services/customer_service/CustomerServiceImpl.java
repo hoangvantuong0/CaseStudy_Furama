@@ -6,10 +6,12 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CustomerServiceImpl implements CustomerService {
+    public static final String CUSTOMER_PATH = "src/data/customer.csv";
     static LinkedList<Customer> customerList = new LinkedList<>();
 
     static {
-        Customer customer = new Customer(01, "Nguyễn Văn Ba", "10/02/1996", "Male", 0123455674, 0375235223, "Nguyenvanba@gmail.com",
+        Customer customer = new Customer("10001", "Nguyễn Văn Ba", "10/02/1996", "Male",
+                "0123455674", "0375235223", "Nguyenvanba@gmail.com",
                 "Diamond", "Quảng Nam");
         customerList.add(customer);
     }
@@ -18,22 +20,22 @@ public class CustomerServiceImpl implements CustomerService {
     public void add() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter name: ");
+        String id = scanner.nextLine();
+        System.out.println("Enter the name: ");
         String name = scanner.nextLine();
         System.out.println("Enter day of birth: ");
         String dayOfBirth = scanner.nextLine();
-        System.out.println("Enter gender: ");
+        System.out.println("Enter the gender: ");
         String gender = scanner.nextLine();
         System.out.println("enter identity card number: ");
-        int identityCard = Integer.parseInt(scanner.nextLine());
+        String identityCard = scanner.nextLine();
         System.out.println("Enter phone number: ");
-        int phoneNumber = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter email: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.println("Enter the email: ");
         String email = scanner.nextLine();
         System.out.println("Enter kinds of customer: ");
         String kindsOfCustomer = scanner.nextLine();
-        System.out.println("Enter address: ");
+        System.out.println("Enter the address: ");
         String address = scanner.nextLine();
         Customer customer = new Customer(id, name, dayOfBirth, gender, identityCard, phoneNumber, email, kindsOfCustomer, address);
         customerList.add(customer);
@@ -42,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void display() {
         for (int i = 0; i < customerList.size(); i++) {
-            System.out.println(customerList.get(i));
+            System.out.println((i+1) + " " +customerList.get(i).toString());
         }
     }
 
@@ -50,22 +52,22 @@ public class CustomerServiceImpl implements CustomerService {
     public void edit() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter id: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter name: ");
+        String id = scanner.nextLine();
+        System.out.println("Enter the name: ");
         String name = scanner.nextLine();
         System.out.println("Enter day of birth: ");
         String dayOfBirth = scanner.nextLine();
         System.out.println("Enter gender: ");
         String gender = scanner.nextLine();
         System.out.println("enter identity card number: ");
-        int identityCard = Integer.parseInt(scanner.nextLine());
+        String identityCard = scanner.nextLine();
         System.out.println("Enter phone number: ");
-        int phoneNumber = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter email: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.println("Enter the email: ");
         String email = scanner.nextLine();
         System.out.println("Enter kinds of customer: ");
         String kindsOfCustomer = scanner.nextLine();
-        System.out.println("Enter address: ");
+        System.out.println("Enter the address: ");
         String address = scanner.nextLine();
         Customer customer = new Customer(id, name, dayOfBirth, gender, identityCard, phoneNumber, email, kindsOfCustomer, address);
         for (int i = 0; i < customerList.size(); i++) {

@@ -47,4 +47,8 @@ public class Room extends Facility{
         return this.getIdFacility().equals(((Room) obj).getIdFacility())
                 && this.getFreeService().equals(((Room) obj).getFreeService());
     }
+    public String getInformationRoom() {
+        return getIdFacility()+ "," +getService() + "," + getAreaUsing() +"," + getRentalFee()+ "," + getNumberOfPeople() +
+                ","  + getRentalType() + "," + freeService;
+    }
 }

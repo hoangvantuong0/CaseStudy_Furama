@@ -6,7 +6,6 @@ public class Employee extends Person {
     public double salary;
 
     public Employee() {
-
     }
 
     public Employee(String standard, String position, double salary) {
@@ -15,14 +14,13 @@ public class Employee extends Person {
         this.salary = salary;
     }
 
-    public Employee(int id, String name, String dayOfBirth, String gender, int identityCard,
-                    int phoneNumber, String email, String standard, String position, double salary) {
+    public Employee(String id, String name, String dayOfBirth, String gender, String identityCard,
+                    String phoneNumber, String email, String standard, String position, double salary) {
         super(id, name, dayOfBirth, gender, identityCard, phoneNumber, email);
         this.standard = standard;
         this.position = position;
         this.salary = salary;
     }
-
 
     public String getStandard() {
         return standard;

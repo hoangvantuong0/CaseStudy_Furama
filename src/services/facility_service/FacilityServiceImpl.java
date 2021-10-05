@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FacilityServiceImpl implements FacilityService {
+    public static final String FACILITY_PATH = "src/data/facility.csv";
     Scanner scanner = new Scanner(System.in);
     Map<Facility, Integer> facilityList = new LinkedHashMap<>();
 

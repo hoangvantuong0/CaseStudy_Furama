@@ -11,7 +11,8 @@ public class Facility {
 
     }
 
-    public Facility(String idFacility, String service, double areaUsing, double rentalFee, int numberOfPeople, String rentalType) {
+    public Facility(String idFacility, String service, double areaUsing, double rentalFee, int numberOfPeople,
+                    String rentalType) {
         this.idFacility = idFacility;
         this.service = service;
         this.areaUsing = areaUsing;
@@ -90,5 +91,8 @@ public class Facility {
         Facility facility = (Facility) obj;
         return this.idFacility.equals(((Facility) obj).idFacility)
                 && this.getService().equals(((Facility) obj).getService());
+    }
+    public String getInformationFacility() {
+        return idFacility + "," + service + "," + areaUsing + "," + rentalFee + "," + numberOfPeople + "," + rentalType;
     }
 }

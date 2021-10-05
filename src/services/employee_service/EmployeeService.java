@@ -8,8 +8,10 @@ public interface EmployeeService extends Services {
 
     @Override
     void display();
-@Override
+
+    @Override
     void edit();
-@Override
+
+    @Override
     void delete();
 }
