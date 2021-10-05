@@ -1,6 +1,7 @@
 package controllers;
 
 import services.booking_service.BookingServiceImpl;
+import services.contract_service.ContractServiceImpl;
 import services.customer_service.CustomerService;
 import services.customer_service.CustomerServiceImpl;
 import services.employee_service.EmployeeServiceImpl;
@@ -15,9 +16,10 @@ public class FuramaController {
         CustomerService customerService = new CustomerServiceImpl();
         FacilityServiceImpl facilityService = new FacilityServiceImpl();
         BookingServiceImpl bookingService = new BookingServiceImpl();
+        ContractServiceImpl contractService = new ContractServiceImpl();
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
-        while (choice !=6) {
+        while (choice != 6) {
             System.out.println("Menu: " + "\n" +
                     "1. Employee Management" + "\n" +
                     "2. Customer Management" + "\n" +
@@ -112,7 +114,7 @@ public class FuramaController {
                         System.out.println("Menu Booking Management: " + "\n" +
                                 "1. Add new booking" + "\n" +
                                 "2. Display list booking" + "\n" +
-                                "3. Create new constracts" + "\n" +
+                                "3. Create new contracts" + "\n" +
                                 "4. Display list contracts" + "\n" +
                                 "5. Edit contracts" + "\n" +
                                 "6. Return main menu");
@@ -126,8 +128,13 @@ public class FuramaController {
                                 bookingService.display();
                                 break;
                             case 3:
+                                contractService.add();
                                 break;
                             case 4:
+                                contractService.display();
+                            case 5:
+                                break;
+                            case 6:
                                 flag1 = false;
                         }
                     }

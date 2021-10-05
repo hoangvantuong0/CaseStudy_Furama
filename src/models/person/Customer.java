@@ -4,9 +4,7 @@ public class Customer extends Person {
     private String kindsOfCustomer;
     private String address;
 
-    public Customer(String kindsOfCustomer, String address) {
-        this.kindsOfCustomer = kindsOfCustomer;
-        this.address = address;
+    public Customer() {
     }
 
     public Customer(String id, String name, String dayOfBirth, String gender, String identityCard,

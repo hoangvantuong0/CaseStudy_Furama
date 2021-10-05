@@ -1,6 +1,9 @@
 package models.contract;
 
 
+import models.booking.Booking;
+import models.person.Customer;
+
 public class Contract {
     private int idContract;
     private int idBooking;
@@ -8,7 +11,7 @@ public class Contract {
     private double totalPay;
     private int idCostumer;
 
-    public Contract() {
+    public Contract(int id, int booking, double pre, double pay, double customer) {
     }
 
     public Contract(int idContract, int idBooking, double deposit, double totalPay, int idCostumer) {
