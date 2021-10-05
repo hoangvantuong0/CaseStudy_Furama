@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import static services.booking_service.ReadBookingData.readFileBooking;
+import static services.booking_service.WriteBookingData.writeFileBooking;
 import static services.customer_service.CustomerServiceImpl.CUSTOMER_PATH;
 import static services.customer_service.ReadCustomerData.readFileCustomer;
 import static services.facility_service.FacilityServiceImpl.FACILITY_PATH;
@@ -34,8 +35,8 @@ public class BookingServiceImpl implements BookingService {
         CustomerServiceImpl customerService = new CustomerServiceImpl();
         customerService.display();
         List<Customer> customerList = readFileCustomer(CUSTOMER_PATH);
+        System.out.println(customerList);
         Map<Facility, Integer> facilityList = readFileFacility(FACILITY_PATH);
-        System.out.println("Customer service information and facility: ");
         System.out.println("Enter index customer: ");
         int index = Integer.parseInt(scanner.nextLine());
         Customer customer = customerList.get(index - 1);
@@ -47,9 +48,6 @@ public class BookingServiceImpl implements BookingService {
         String endDay = scanner.nextLine();
         System.out.println("Enter service: ");
         String serviceName = scanner.nextLine();
-//        System.out.println("Enter customer: ");
-//        Customer customer = scanner.nextLine();
-
         Facility facility = new Facility();
         for (Map.Entry<Facility, Integer> map : facilityList.entrySet()) {
             if (map.getKey().getService().equals(serviceName)) {
@@ -63,9 +61,8 @@ public class BookingServiceImpl implements BookingService {
         String typeOfService = scanner.nextLine();
         Booking booking = new Booking(idBooking, startDay, endDay, customer,
                 facility, typeOfService);
-//        file.delete();
-//        bookingList.add(booking);
-//        writeFileBooking(bookingList, BOOKING_PATH, true);
+
+        writeFileBooking(bookingList, BOOKING_PATH, true);
 
     }
 

@@ -4,10 +4,14 @@ import models.facility.Facility;
 import models.facility.House;
 import models.facility.Room;
 import models.facility.Villa;
+import utils.InvalidFormatException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import static services.facility_service.WriteFacilityData.writeFileFacility;
+import static utils.Regex.*;
 
 public class FacilityServiceImpl implements FacilityService {
     public static final String FACILITY_PATH = "src/data/facility.csv";
@@ -19,23 +23,113 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public void add() {
-        System.out.println("Choose the facility to add: " + "\n" +
-                "1. Room " + "\n" +
-                "2. House " + "\n" +
-                "3. Villa " + "\n");
-        int choice = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter Id of Facility: ");
-        String idFacility = scanner.nextLine();
-        System.out.println("Enter service: ");
-        String service = scanner.nextLine();
-        System.out.println("Enter area of using: ");
-        double areaUsing = Double.parseDouble(scanner.nextLine());
-        System.out.println("Enter rental fee: ");
-        double rentalFee = Double.parseDouble(scanner.nextLine());
-        System.out.println("Enter number of people: ");
-        int numberOfPeople = Integer.parseInt(scanner.nextLine());
-        System.out.println("Enter rental of type: ");
-        String rentalType = scanner.nextLine();
+        boolean flag;
+        int choice = 0;
+        do {
+            try {
+                flag = true;
+                System.out.println("Choose the facility to add: " + "\n" +
+                        "1. Room " + "\n" +
+                        "2. House " + "\n" +
+                        "3. Villa " + "\n");
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            }
+        } while (!flag);
+
+        String idFacility = null;
+        do {
+            try {
+                flag = true;
+                System.out.println("Enter facility: ");
+                idFacility = scanner.nextLine();
+                checkNumberId(idFacility);
+            } catch (InvalidFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            }
+        } while (!flag);
+        String service = null;
+        do {
+            try {
+                flag = true;
+                System.out.println("Enter service: ");
+                service = scanner.nextLine();
+                checkNameService(service);
+            } catch (InvalidFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            }
+        } while (!flag);
+        double areaUsing = 0.0d;
+        do {
+            try {
+                flag = true;
+                System.out.println("Enter area of using: ");
+                areaUsing = Double.parseDouble(scanner.nextLine());
+                checkArea(areaUsing);
+            } catch (InvalidFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            }
+        } while (!flag);
+        double rentalFee = 0.0d;
+        do {
+            try {
+                flag = true;
+                System.out.println("Enter rental fee: ");
+                rentalFee = Double.parseDouble(scanner.nextLine());
+                checkRentalFee(rentalFee);
+            } catch (InvalidFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            }
+        } while (!flag);
+        int numberOfPeople = 0;
+        do {
+            try {
+                flag = true;
+                System.out.println("Enter number of people: ");
+                numberOfPeople = Integer.parseInt(scanner.nextLine());
+                checkPerson(numberOfPeople);
+            } catch (InvalidFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            }
+        } while (!flag);
+        String rentalType = null;
+        do {
+            try {
+                flag = true;
+                System.out.println("Enter rental of type: ");
+                rentalType = scanner.nextLine();
+                checkNameService(rentalType);
+            } catch (InvalidFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                flag = false;
+            }
+        } while (!flag);
+
         Facility facility = null;
         switch (choice) {
             case 1:
@@ -52,6 +146,7 @@ public class FacilityServiceImpl implements FacilityService {
                 break;
         }
         facilityList.put(facility, 0);
+        writeFileFacility(facilityList, FACILITY_PATH, true);
     }
 
     @Override

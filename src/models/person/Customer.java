@@ -4,15 +4,13 @@ public class Customer extends Person {
     private String kindsOfCustomer;
     private String address;
 
-    public Customer(String s, String s1, String s2, String s3, String s4, String s5, String s6, String s7, String s8, String s9) {
-    }
-
     public Customer(String kindsOfCustomer, String address) {
         this.kindsOfCustomer = kindsOfCustomer;
         this.address = address;
     }
 
-    public Customer(String id, String name, String dayOfBirth, String gender, String identityCard, String phoneNumber, String email, String kindsOfCustomer, String address) {
+    public Customer(String id, String name, String dayOfBirth, String gender, String identityCard,
+                    String phoneNumber, String email, String kindsOfCustomer, String address) {
         super(id, name, dayOfBirth, gender, identityCard, phoneNumber, email);
         this.kindsOfCustomer = kindsOfCustomer;
         this.address = address;

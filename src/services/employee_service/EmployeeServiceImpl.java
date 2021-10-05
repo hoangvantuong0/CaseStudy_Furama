@@ -5,16 +5,11 @@ import models.person.Employee;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static services.employee_service.WriteEmployeeData.writeFileEmployee;
+
 public class EmployeeServiceImpl implements EmployeeService {
     static final String EMPLOYEE_PATH = "src/data/employee.csv";
     static ArrayList<Employee> employeesList = new ArrayList<>();
-
-    static {
-        Employee employee1 = new Employee("01", "Nguyễn Văn An", "10-2", "male",
-                "0298475214", "012452363", "nguyenvanan.com", "Đại học",
-                "Worker", 2012321);
-        employeesList.add(employee1);
-    }
 
     @Override
     public void add() {
@@ -41,6 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         double salary = Double.parseDouble(scanner.nextLine());
         Employee employee = new Employee(id, name, dayOfBirth, gender, identityCard, phoneNumber, email, standard, position, salary);
         employeesList.add(employee);
+        writeFileEmployee(employeesList, EMPLOYEE_PATH, true);
     }
 
     @Override

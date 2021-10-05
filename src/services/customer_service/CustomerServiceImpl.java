@@ -1,20 +1,13 @@
 package services.customer_service;
 
 import models.person.Customer;
-
 import java.util.LinkedList;
 import java.util.Scanner;
+import static services.customer_service.WriteCustomerData.writeFileCustomer;
 
 public class CustomerServiceImpl implements CustomerService {
     public static final String CUSTOMER_PATH = "src/data/customer.csv";
     static LinkedList<Customer> customerList = new LinkedList<>();
-
-    static {
-        Customer customer = new Customer("10001", "Nguyễn Văn Ba", "10/02/1996", "Male",
-                "0123455674", "0375235223", "Nguyenvanba@gmail.com",
-                "Diamond", "Quảng Nam");
-        customerList.add(customer);
-    }
 
     @Override
     public void add() {
@@ -39,6 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
         String address = scanner.nextLine();
         Customer customer = new Customer(id, name, dayOfBirth, gender, identityCard, phoneNumber, email, kindsOfCustomer, address);
         customerList.add(customer);
+        writeFileCustomer(customerList, CUSTOMER_PATH, true );
     }
 
     @Override
