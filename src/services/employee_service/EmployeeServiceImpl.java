@@ -1,15 +1,20 @@
 package services.employee_service;
 
+import models.facility.Facility;
 import models.person.Employee;
+import utils.ReadAndWriteFile;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import static services.employee_service.ReadEmployeeData.readFileEmployee;
 import static services.employee_service.WriteEmployeeData.writeFileEmployee;
 
 public class EmployeeServiceImpl implements EmployeeService {
     static final String EMPLOYEE_PATH = "src/data/employee.csv";
-    static ArrayList<Employee> employeesList = new ArrayList<>();
+     List<Employee> employeesList = readFileEmployee(EMPLOYEE_PATH);
 
     @Override
     public void add() {
@@ -28,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         String phoneNumber = scanner.nextLine();
         System.out.println("Enter email: ");
         String email = scanner.nextLine();
-        System.out.println("Enter standard: ");
+        System.out.println("Enter standard (intermediate/college/university/postgraduate: ");
         String standard = scanner.nextLine();
         System.out.println("Enter position: ");
         String position = scanner.nextLine();
@@ -36,6 +41,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         double salary = Double.parseDouble(scanner.nextLine());
         Employee employee = new Employee(id, name, dayOfBirth, gender, identityCard, phoneNumber, email, standard, position, salary);
         employeesList.add(employee);
+        File file = new File(EMPLOYEE_PATH);
+        file.delete();
         writeFileEmployee(employeesList, EMPLOYEE_PATH, true);
     }
 

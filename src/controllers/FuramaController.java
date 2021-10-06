@@ -65,8 +65,8 @@ public class FuramaController {
                                 "3. Edit customer" + "\n" +
                                 "4. Return main menu");
                         System.out.println("Enter your choice: ");
-                        int choice1 = Integer.parseInt(scanner.nextLine());
-                        switch (choice1) {
+                        int choice2 = Integer.parseInt(scanner.nextLine());
+                        switch (choice2) {
                             case 1:
                                 customerService.display();
                                 break;
@@ -91,8 +91,8 @@ public class FuramaController {
                                 "3. Display list facility maintenance" + "\n" +
                                 "4. Return main menu");
                         System.out.println("Enter your choice: ");
-                        int choice1 = Integer.parseInt(scanner.nextLine());
-                        switch (choice1) {
+                        int choice3 = Integer.parseInt(scanner.nextLine());
+                        switch (choice3) {
                             case 1:
                                 facilityService.display();
                                 break;
@@ -119,8 +119,8 @@ public class FuramaController {
                                 "5. Edit contracts" + "\n" +
                                 "6. Return main menu");
                         System.out.println("Enter your choice: ");
-                        int choice1 = Integer.parseInt(scanner.nextLine());
-                        switch (choice1) {
+                        int choice4 = Integer.parseInt(scanner.nextLine());
+                        switch (choice4) {
                             case 1:
                                 bookingService.add();
                                 break;
@@ -148,8 +148,8 @@ public class FuramaController {
                                 "2. Display list customers get voucher" + "\n" +
                                 "4. Return main menu");
                         System.out.println("Enter your choice: ");
-                        int choice1 = Integer.parseInt(scanner.nextLine());
-                        switch (choice1) {
+                        int choice5 = Integer.parseInt(scanner.nextLine());
+                        switch (choice5) {
                             case 1:
                                 break;
                             case 2:

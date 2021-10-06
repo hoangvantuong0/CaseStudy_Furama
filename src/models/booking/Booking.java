@@ -11,10 +11,8 @@ public class Booking {
     private Facility facility;
     private String typeOfService;
 
-    public Booking(int i, String s, String s1, String s2, String s3, String s4) {
-    }
-
-    public Booking(int idBooking, String startDay, String endDay, Customer customer, Facility facility) {
+    public Booking(int idBooking, String startDay, String endDay, Customer customer,
+                   Facility facility, String typeOfService) {
         this.idBooking = idBooking;
         this.startDay = startDay;
         this.endDay = endDay;

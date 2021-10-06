@@ -5,11 +5,17 @@ import models.contract.Contract;
 import models.person.Customer;
 import services.booking_service.BookingServiceImpl;
 
+import java.io.File;
 import java.util.*;
+
+import static services.contract_service.ReadContractData.readFileContract;
+import static services.contract_service.WriteContractData.writeFileContract;
 
 public class ContractServiceImpl implements ContractService {
     static Scanner scanner = new Scanner(System.in);
-    static List<Contract> contractList = new ArrayList<>();
+    public static final String CONTRACT_PATH = "src/data/contract.csv";
+    List<Contract> contractList = readFileContract(CONTRACT_PATH);
+
 
 
     @Override
@@ -40,10 +46,14 @@ public class ContractServiceImpl implements ContractService {
             contractList.add(contract);
             System.out.println("Complete!");
         }
+        File file = new File(CONTRACT_PATH);
+        file.delete();
+        writeFileContract(contractList, CONTRACT_PATH, true);
     }
+
     @Override
     public void display() {
-        for (Contract contract : contractList){
+        for (Contract contract : contractList) {
             System.out.println(contract.toString());
         }
     }

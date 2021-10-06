@@ -1,37 +1,45 @@
 package services.customer_service;
 
+import models.facility.Facility;
 import models.person.Customer;
+
+import java.io.File;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
+
+import static services.customer_service.ReadCustomerData.readFileCustomer;
 import static services.customer_service.WriteCustomerData.writeFileCustomer;
 
 public class CustomerServiceImpl implements CustomerService {
     public static final String CUSTOMER_PATH = "src/data/customer.csv";
-    static LinkedList<Customer> customerList = new LinkedList<>();
+    List<Customer> customerList = readFileCustomer(CUSTOMER_PATH);
 
     @Override
     public void add() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter id: ");
+        System.out.println("Enter id customer: ");
         String id = scanner.nextLine();
-        System.out.println("Enter the name: ");
+        System.out.println("Enter the customer's name: ");
         String name = scanner.nextLine();
         System.out.println("Enter day of birth: ");
         String dayOfBirth = scanner.nextLine();
         System.out.println("Enter the gender: ");
         String gender = scanner.nextLine();
-        System.out.println("enter identity card number: ");
+        System.out.println("Enter identity card number: ");
         String identityCard = scanner.nextLine();
         System.out.println("Enter phone number: ");
         String phoneNumber = scanner.nextLine();
         System.out.println("Enter the email: ");
         String email = scanner.nextLine();
-        System.out.println("Enter kinds of customer: ");
+        System.out.println("Enter kinds of customer (Diamond, Platinum, Gold, Silver, Member): ");
         String kindsOfCustomer = scanner.nextLine();
         System.out.println("Enter the address: ");
         String address = scanner.nextLine();
         Customer customer = new Customer(id, name, dayOfBirth, gender, identityCard, phoneNumber, email, kindsOfCustomer, address);
         customerList.add(customer);
+        File file = new File(CUSTOMER_PATH);
+        file.delete();
         writeFileCustomer(customerList, CUSTOMER_PATH, true );
     }
 

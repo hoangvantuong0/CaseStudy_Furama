@@ -1,5 +1,7 @@
 package utils;
 
+import models.person.Employee;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -4,25 +4,24 @@ import models.booking.Booking;
 import models.facility.Facility;
 import models.facility.Villa;
 import models.person.Customer;
-import utils.BookingComparator;
 
+import java.io.File;
 import java.util.*;
 
-public class BookingServiceImpl implements BookingService {
-    //    public static final String BOOKING_PATH = "src/data/booking.csv";
-//    File file = new File(BOOKING_PATH);
-//    File fileFacility = new File(FACILITY_PATH);
-//    Set<Booking> bookingList = readFileBooking(BOOKING_PATH);
+import static services.booking_service.ReadBookingData.readFileBooking;
+import static services.booking_service.WriteBookingData.writeFileBooking;
 
+public class BookingServiceImpl implements BookingService {
+    public static final String BOOKING_PATH = "src/data/booking.csv";
     Scanner scanner = new Scanner(System.in);
-    static Set<Booking> bookingSet = new TreeSet<>(new BookingComparator());
+    Set<Booking> bookingSet = readFileBooking(BOOKING_PATH);
     static List<Customer> customerList = new ArrayList<>();
-    static Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
+    public static Map<Facility, Integer> facilityIntegerMap = new LinkedHashMap<>();
 
     static {
         Customer customer1 = new Customer("1", "Hoàng Văn An", "10/02/1994", "Male",
                 "0124126453", "037512637", "hoangvanan@gmail.com",
-                "Vip", "Đà Nẵng");
+                "Gold", "Đà Nẵng");
         Customer customer2 = new Customer("2", "Nguyễn Thị Linh", "13/03/1995", "FeMale",
                 "0124126213", "03751357", "nguyenthilinh@gmail.com",
                 "normal", "Quảng Ngãi");
@@ -40,19 +39,28 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void add() {
-        int id = 1;
-        if (!bookingSet.isEmpty()) {
-            id = bookingSet.size();
-        }
+
+        System.out.println("Input id booking: ");
+        int idBooking = Integer.parseInt(scanner.nextLine());
         Customer customer = chooseCustomer();
         Facility facility = chooseFacility();
         System.out.println("Input start day: ");
         String startDay = scanner.nextLine();
         System.out.println("Input end day: ");
         String endDay = scanner.nextLine();
-        Booking booking = new Booking(id, startDay, endDay, customer, facility);
+        System.out.println("Input type of service: ");
+        String typeOfService = scanner.nextLine();
+        Booking booking = new Booking(idBooking, startDay, endDay, customer, facility, typeOfService);
         bookingSet.add(booking);
         System.out.println("Booking complete!");
+        File file = new File(BOOKING_PATH);
+        file.delete();
+        writeFileBooking(bookingSet, BOOKING_PATH, true);
+        for (Map.Entry<Facility, Integer> entry : facilityIntegerMap.entrySet()) {
+            if (chooseFacility().getIdFacility().equals(entry.getKey().getIdFacility())) {
+                entry.setValue(entry.getValue() + 1);
+            }
+        }
     }
 
 
@@ -121,51 +129,3 @@ public class BookingServiceImpl implements BookingService {
 
     }
 }
-//    @Override
-//    public void add() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Customer service information and facility: ");
-//        FacilityServiceImpl facilityService = new FacilityServiceImpl();
-//        facilityService.display();
-//        CustomerServiceImpl customerService = new CustomerServiceImpl();
-//        customerService.display();
-//        List<Customer> customerList = readFileCustomer(CUSTOMER_PATH);
-//        System.out.println(customerList);
-//        Map<Facility, Integer> facilityList = readFileFacility(FACILITY_PATH);
-//        System.out.println("Enter index customer: ");
-//        int index = Integer.parseInt(scanner.nextLine());
-//        Customer customer = customerList.get(index - 1);
-//        System.out.println("Enter id Booking: ");
-//        int idBooking = Integer.parseInt(scanner.nextLine());
-//        System.out.println("Enter start Day: ");
-//        String startDay = scanner.nextLine();
-//        System.out.println("Enter end Day: ");
-//        String endDay = scanner.nextLine();
-//        System.out.println("Enter service: ");
-//        String serviceName = scanner.nextLine();
-//        Facility facility = new Facility();
-//        for (Map.Entry<Facility, Integer> map : facilityList.entrySet()) {
-//            if (map.getKey().getService().equals(serviceName)) {
-//                facility = map.getKey();
-//                map.setValue(map.getValue() + 1);
-//                fileFacility.delete();
-//                writeFileFacility(facilityList, FACILITY_PATH, true);
-//            }
-//        }
-//        System.out.println("Enter type of service ");
-//        String typeOfService = scanner.nextLine();
-//        Booking booking = new Booking(idBooking, startDay, endDay, customer,
-//                facility, typeOfService);
-//
-//        writeFileBooking(bookingList, BOOKING_PATH, true);
-
-//    }
-
-//    @Override
-//    public void display() {
-//        for (Booking booking : bookingList) {
-//            System.out.println(booking);
-//        }
-//    }
-
-
