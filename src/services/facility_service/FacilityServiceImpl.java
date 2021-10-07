@@ -5,19 +5,24 @@ import models.facility.House;
 import models.facility.Room;
 import models.facility.Villa;
 import services.booking_service.BookingServiceImpl;
-import utils.InvalidFormatException;
 
 import java.io.File;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import static services.facility_service.ReadFacilityData.readFileFacility;
 import static services.facility_service.WriteFacilityData.writeFileFacility;
-import static utils.Regex.*;
+import static utils.Regex.checkRegex;
 
 public class FacilityServiceImpl implements FacilityService {
+    private static final String REGEX_ID = "^SV(VL|HO|RO)\\d{4}$";
+    private static final String REGEX_NAME = "^[A-Z](\\w+\\s?)*$";
+    private static final String REGEX_AREA = "^([3-9][1-9]|[1-9]\\d{2,}).?\\d*$";
+    private static final String REGEX_INT = "^[1-9]|[1][0-9]+$";
+    private static final String REGEX_PERSON = "^[1-9]|[1][0-9]$";
+    private static final String REGEX_CHOICE = "^[1-3]$";
     public static final String FACILITY_PATH = "src/data/facility.csv";
+    File file = new File(FACILITY_PATH);
     Scanner scanner = new Scanner(System.in);
     Map<Facility, Integer> facilityList = readFileFacility(FACILITY_PATH);
 
@@ -25,10 +30,10 @@ public class FacilityServiceImpl implements FacilityService {
         facilityList.put(new Facility("1", "villa1", 350, 4050,
                 14, "By month"), 0);
         facilityList.put(new Facility("2", "villa2", 450, 4000,
-              13, "By dai"), 0);
+                13, "By dai"), 0);
         Facility facility1 = new Facility("3", "house", 350, 4500,
                 12, "By hour");
-        facilityList.put(facility1, 4 );
+        facilityList.put(facility1, 4);
     }
 
     public static void main(String[] args) {
@@ -36,133 +41,106 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public void add() {
-        boolean flag;
-        int choice = 0;
-        do {
-            try {
-                flag = true;
-                System.out.println("Choose the facility to add: " + "\n" +
-                        "1. Room " + "\n" +
-                        "2. House " + "\n" +
-                        "3. Villa " + "\n");
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            }
-        } while (!flag || choice > 3 || choice < 0);
 
-        String idFacility = null;
-        do {
-            try {
-                flag = true;
-                System.out.println("Enter facility (SV-VL/HO/RO-YYYY): ");
-                idFacility = scanner.nextLine();
-                checkNumberId(idFacility);
-            } catch (InvalidFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            }
-        } while (!flag);
-        String service = null;
-        do {
-            try {
-                flag = true;
-                System.out.println("Enter service name (A-Z-a-z): ");
-                service = scanner.nextLine();
-                checkNameService(service);
-            } catch (InvalidFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            }
-        } while (!flag);
-        double areaUsing = 0.0d;
-        do {
-            try {
-                flag = true;
-                System.out.println("Enter area of using (must be > 30): ");
-                areaUsing = Double.parseDouble(scanner.nextLine());
-                checkArea(areaUsing);
-            } catch (InvalidFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            }
-        } while (!flag);
-        double rentalFee = 0.0d;
-        do {
-            try {
-                flag = true;
-                System.out.println("Enter rental fee (must be > 0): ");
-                rentalFee = Double.parseDouble(scanner.nextLine());
-                checkRentalFee(rentalFee);
-            } catch (InvalidFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            }
-        } while (!flag);
-        int numberOfPeople = 0;
-        do {
-            try {
-                flag = true;
-                System.out.println("Enter number of people (<20 && >0): ");
-                numberOfPeople = Integer.parseInt(scanner.nextLine());
-                checkPerson(numberOfPeople);
-            } catch (InvalidFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            }
-        } while (!flag);
-        String rentalType = null;
-        do {
-            try {
-                flag = true;
-                System.out.println("Enter rental of type (by month/day/hour): ");
-                rentalType = scanner.nextLine();
-                checkNameService(rentalType);
-            } catch (InvalidFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                flag = false;
-            }
-        } while (!flag);
-
-        Facility facility = null;
+        System.out.println("Choice type of facility: " + "\n" +
+                " 1: Room\n" +
+                " 2: House\n" +
+                " 3: Villa");
+        int choice = Integer.parseInt(inputChoice());
         switch (choice) {
             case 1:
-                facility = new Room(idFacility, service, areaUsing, rentalFee,
-                        numberOfPeople, rentalType, freeService());
+                Facility facility1 = new Room(inputId(), inputServiceName(), Double.parseDouble(inputArea()),
+                        Double.parseDouble(inputCostRent()), Integer.parseInt(inputPersonNumber()),
+                        inputTypeRent(), inputFreeService());
+
+                file.delete();
+                facilityList.put(facility1, 0);
+                writeFileFacility(facilityList, FACILITY_PATH, true);
                 break;
             case 2:
-                facility = new House(idFacility, service, areaUsing, rentalFee,
-                        numberOfPeople, rentalType, addStandard(), addFloor());
+                Facility facility2 = new House(inputId(), inputServiceName(), Double.parseDouble(inputArea()),
+                        Double.parseDouble(inputCostRent()), Integer.parseInt(inputPersonNumber()),
+                        inputTypeRent(), inputStandard(), Integer.parseInt(inputFloor()));
+                file.delete();
+                facilityList.put(facility2, 0);
+                writeFileFacility(facilityList, FACILITY_PATH, true);
                 break;
             case 3:
-                facility = new Villa(idFacility, service, areaUsing, rentalFee,
-                        numberOfPeople, rentalType, addStandard(), addPoolSize(), addFloor());
-                break;
+                Facility facility3 = new Villa(inputId(), inputServiceName(), Double.parseDouble(inputArea()),
+                        Double.parseDouble(inputCostRent()), Integer.parseInt(inputPersonNumber()),
+                        inputTypeRent(), inputStandard(), Double.parseDouble(inputPoolArea()), Integer.parseInt(inputFloor()));
+                file.delete();
+                facilityList.put(facility3, 0);
+                writeFileFacility(facilityList, FACILITY_PATH, true);
         }
-        BookingServiceImpl.facilityIntegerMap.put(facility, 0);
-        File file = new File(FACILITY_PATH);
-        file.delete();
-        writeFileFacility(facilityList, FACILITY_PATH, true);
     }
+
+    private String inputChoice() {
+        System.out.println("Enter choice from 1 to 3: ");
+        String choice = scanner.nextLine();
+        return checkRegex(choice, REGEX_CHOICE, "Wrong input! please choose 1 or 2 or 3!");
+    }
+
+    private String inputId() {
+        System.out.println("Enter id follow this format (SV)VL/HO/RO-0000: ");
+        String id = scanner.nextLine();
+        return checkRegex(id, REGEX_ID, "Wrong format! please input like this: (SV)VL/HO/RO0000");
+    }
+
+    private String inputServiceName() {
+        System.out.println("Enter Service name (must begin a capital): ");
+        String serviceName = scanner.nextLine();
+        return checkRegex(serviceName, REGEX_NAME, "Wrong format! must begin a capital");
+    }
+
+    private String inputArea() {
+        System.out.println("Enter area ");
+        String area = scanner.nextLine();
+        return checkRegex(area, REGEX_AREA, "Area >30");
+    }
+
+    private String inputPersonNumber() {
+        System.out.println("Enter person number (area > 0 && <20) ");
+        String personNumber = scanner.nextLine();
+        return checkRegex(personNumber, REGEX_PERSON, " input again! Area > 0 && <20 ");
+    }
+
+    private String inputCostRent() {
+        System.out.println("Enter cost rent (cost >0): ");
+        String costRent = scanner.nextLine();
+        return checkRegex(costRent, REGEX_AREA, "Cost rent must be positive");
+    }
+
+    private String inputTypeRent() {
+        System.out.println("Enter type of rent (first word must be a capital): ");
+        String typeOfRent = scanner.nextLine();
+        return checkRegex(typeOfRent, REGEX_NAME, "Wrong format, first word must be a capital");
+    }
+
+    private String inputStandard() {
+        System.out.println("Enter add Standard: ");
+        String standard = scanner.nextLine();
+        return checkRegex(standard, REGEX_NAME, "Wrong format, first word is capital");
+    }
+
+    private String inputPoolArea() {
+        System.out.println("Enter pool area: ");
+        String poolArea = scanner.nextLine();
+        return checkRegex(poolArea, REGEX_AREA, "Area >30");
+    }
+
+    private String inputFloor() {
+        System.out.println("Enter number of floor: ");
+        String numberOfFloor = scanner.nextLine();
+        return checkRegex(numberOfFloor, REGEX_PERSON, " Number of floor have to positive");
+    }
+
+    public String inputFreeService() {
+        System.out.println("Enter free service (First word must be a capital): ");
+        String freeService = scanner.nextLine();
+        return checkRegex(freeService, REGEX_NAME, "Wrong format! First word must be a capital");
+    }
+
 
     @Override
     public void display() {
